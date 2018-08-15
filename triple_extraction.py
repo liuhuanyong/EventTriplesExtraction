@@ -20,20 +20,20 @@ class TripleExtractor:
         role_info = roles_dict[role_index]
         if 'A0' in role_info.keys() and 'A1' in role_info.keys():
             s = ''.join([words[word_index] for word_index in range(role_info['A0'][1], role_info['A0'][2]+1) if
-                         postags[word_index][0] not in ['w', 'u'] and words[word_index]])
+                         postags[word_index][0] not in ['w', 'u', 'x'] and words[word_index]])
             o = ''.join([words[word_index] for word_index in range(role_info['A1'][1], role_info['A1'][2]+1) if
-                         postags[word_index][0] not in ['w', 'u'] and words[word_index]])
-            if s and o:
+                         postags[word_index][0] not in ['w', 'u', 'x'] and words[word_index]])
+            if s  and o:
                 return '1', [s, v, o]
-        elif 'A0' in role_info:
-            s = ''.join([words[word_index] for word_index in range(role_info['A0'][1], role_info['A0'][2] + 1) if
-                         postags[word_index][0] not in ['w', 'u']])
-            if s:
-                return '2', [s, v]
-        elif 'A1' in role_info:
-            o = ''.join([words[word_index] for word_index in range(role_info['A1'][1], role_info['A1'][2]+1) if
-                         postags[word_index][0] not in ['w']])
-            return '3', [v, o]
+        # elif 'A0' in role_info:
+        #     s = ''.join([words[word_index] for word_index in range(role_info['A0'][1], role_info['A0'][2] + 1) if
+        #                  postags[word_index][0] not in ['w', 'u', 'x']])
+        #     if s:
+        #         return '2', [s, v]
+        # elif 'A1' in role_info:
+        #     o = ''.join([words[word_index] for word_index in range(role_info['A1'][1], role_info['A1'][2]+1) if
+        #                  postags[word_index][0] not in ['w', 'u', 'x']])
+        #     return '3', [v, o]
         return '4', []
 
     '''三元组抽取主函数'''
@@ -127,9 +127,11 @@ def test():
     事情经过究竟如何，曾引起舆论纷纷，而随着时间的推移，更多的反思也留给了我们，只有解决了这起事件中暴露出的一些问题，比如患者的医疗选择权，人们对剖宫产和顺产的认识问题等，这样的悲剧才不会再次发生。央视记者找到了等待产妇的家属，主治医生，病区主任，以及当时的两位助产师，一位实习医生，希望通过他们的讲述，更准确地还原事情经过。
     产妇待产时坠亡，事件有何疑点。公安机关经过调查，排除他杀可能，初步认定马茸茸为跳楼自杀身亡。马茸茸为何会在医院待产期间跳楼身亡，这让所有人的目光都聚焦到了榆林第一医院，这家在当地人心目中数一数二的大医院。
     就这起事件来说，如何保障患者和家属的知情权，如何让患者和医生能够多一份实质化的沟通？这就需要与之相关的法律法规更加的细化、人性化并且充满温度。用这种温度来消除孕妇对未知的恐惧，来保障医患双方的权益，迎接新生儿平安健康地来到这个世界。'''
-
+    content4 = '李克强总理今天来我家了,我感到非常荣幸'
+    content5 = ''' 以色列国防军20日对加沙地带实施轰炸，造成3名巴勒斯坦武装人员死亡。此外，巴勒斯坦人与以色列士兵当天在加沙地带与以交界地区发生冲突，一名巴勒斯坦人被打死。当天的冲突还造成210名巴勒斯坦人受伤。
+    当天，数千名巴勒斯坦人在加沙地带边境地区继续“回归大游行”抗议活动。部分示威者燃烧轮胎，并向以军投掷石块、燃烧瓶等，驻守边境的以军士兵向示威人群发射催泪瓦斯并开枪射击。'''
     extractor = TripleExtractor()
-    svos = extractor.triples_main(content1)
+    svos = extractor.triples_main(content2)
     print('svos', svos)
 
 test()
