@@ -52,8 +52,8 @@
                  ]
 
 # 对比结论
-1、LTP在DDParser之外，还提供了语义角色标注的功能，这个可以用于事件三元组抽取的有效补充。
-2、LTP速度比DDParser要快。  
+1、LTP在DDParser之外，还提供了语义角色标注的功能，这个可以用于事件三元组抽取的有效补充。  
+2、LTP速度比DDParser要快。   
 
 
 If any question about the project or me ,see https://liuhuanyong.github.io/  
