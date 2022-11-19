@@ -6,10 +6,14 @@
 
 import os, re
 from ddparser import DDParser
+from torch.cuda import is_available
+
 
 class SVOParser:
     def __init__(self):
-        self.parser = DDParser(use_pos=True)
+        use_cuda = True if is_available() else False
+        # use_cuda = False
+        self.parser = DDParser(use_pos=True, use_cuda=use_cuda, buckets=True)
         print('loaded model')
 
     '''文章分句处理, 切分长句，冒号，分号，感叹号等做切分标识'''
