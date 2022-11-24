@@ -276,12 +276,10 @@ class ExtractEvent:
                         tmp_dict = {str(verb[0]) + str(verb[1]): ['V', verbs[idx]] for idx, verb in enumerate(verb_tokspans)}
                         pp_dict = {str(pp[0]) + str(pp[1]): ['N', pps[idx]] for idx, pp in enumerate(pp_tokspans)}
                         tmp_dict.update(pp_dict)
-                        sort_keys = sorted([int(i) for i in tmp_dict.keys()])
+                        sort_keys = sorted([i for i in tmp_dict.keys()], key=lambda x: int(x))
                         for i in sort_keys:
-                            if i < 10:
-                                i = '0' + str(i)
-                            wds_tmp.append(tmp_dict[str(i)][-1])
-                            postags_tmp.append(tmp_dict[str(i)][0])
+                            wds_tmp.append(tmp_dict[i][-1])
+                            postags_tmp.append(tmp_dict[i][0])
                         wds_tmp, postags_tmp = self.modify_duplicate(wds_tmp, postags_tmp, self.SPO_v, 'V')
                         wds_tmp, postags_tmp = self.modify_duplicate(wds_tmp, postags_tmp, self.SPO_n, 'N')
                         if len(postags_tmp) < 2:
